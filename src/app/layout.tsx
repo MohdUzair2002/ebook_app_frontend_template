@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
+import { ReduxProvider } from "@/components/providers/ReduxProvider";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -14,10 +15,10 @@ const hanken = Hanken_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "KitabGhar",
+  title: "Darulishaat Ebooks",
   description: "A premium digital bookstore and learning environment.",
   openGraph: {
-    title: "KitabGhar",
+    title: "Darulishaat Ebooks",
     description: "A premium digital bookstore and learning environment.",
     type: "website",
   },
@@ -34,7 +35,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${hanken.variable}`}>
       <body>
-        {children}
+        <ReduxProvider>
+          {children}
+        </ReduxProvider>
       </body>
     </html>
   );

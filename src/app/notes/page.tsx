@@ -5,10 +5,10 @@ import { SiteFooter } from "@/components/site/SiteFooter";
 import { Container } from "@/components/site/Container";
 
 export const metadata: Metadata = {
-  title: "My Notes — KitabGhar",
-  description: "Your personal study and reading notes in KitabGhar.",
+  title: "My Notes — Darulishaat Ebooks",
+  description: "Your personal study and reading notes in DArulishaat Ebooks.",
   openGraph: {
-    title: "My Notes — KitabGhar",
+    title: "My Notes — Darulishaat Ebooks",
     description: "Capture, organize, and revisit your reading notes.",
   },
 };
