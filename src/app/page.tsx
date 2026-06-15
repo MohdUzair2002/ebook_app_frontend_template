@@ -132,7 +132,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="relative">
+          <div className="relative hidden lg:block">
             <div className="rounded-3xl overflow-hidden bg-[#3c5269] p-3 shadow-[0_30px_80px_-20px_rgba(21,25,106,0.35)]">
               <div className="rounded-2xl overflow-hidden bg-black aspect-[16/11]">
                 <img src={heroImgSrc} alt="A serene library interior" width={1280} height={896} className="size-full object-cover" />
@@ -164,7 +164,7 @@ export default function HomePage() {
         </div>
 
         {loading ? (
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {[1, 2, 3, 4].map((i) => (
               <div key={i} className="animate-pulse bg-surface-container rounded-2xl h-80" />
             ))}
@@ -174,7 +174,7 @@ export default function HomePage() {
             No recently added books available.
           </div>
         ) : (
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {recentBooks.slice(0, 4).map((book) => {
               // Map API book details to the premium BookCard format
               const mappedBook = {
