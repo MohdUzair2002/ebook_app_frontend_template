@@ -1,6 +1,6 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState,Suspense } from "react";
 import { useSelector } from "react-redux";
 import { ChevronDown, Search } from "lucide-react";
 import { SiteHeader } from "@/components/site/SiteHeader";
@@ -10,7 +10,7 @@ import { BookCard } from "@/components/site/BookCard";
 import axios from "@/api/axios";
 import { RootState } from "@/store";
 
-export default function BooksPage() {
+function BooksPage() {
   const isLoggedIn = useSelector((state: RootState) => state.auth.isLoggedIn);
   const role = useSelector((state: RootState) => state.auth.role);
   const searchParams = useSearchParams();
@@ -230,5 +230,12 @@ export default function BooksPage() {
 
       <SiteFooter />
     </div>
+  );
+}
+export default function BooksPageWrapper() {
+  return (
+    <Suspense>
+      <BooksPage />
+    </Suspense>
   );
 }
