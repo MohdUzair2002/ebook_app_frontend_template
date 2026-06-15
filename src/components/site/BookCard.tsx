@@ -119,7 +119,7 @@ export function BookCard({
           <div className="mt-auto pt-4 flex flex-col gap-2">
             <div className="flex items-center justify-between">
               <span className="font-display text-lg font-bold text-primary">
-                ${parseFloat(bookPrice || 0).toFixed(2)}
+                ${parseFloat(String(bookPrice || 0)).toFixed(2)}
               </span>
               {!fav && !pur && !nonUser && (
                 <button
