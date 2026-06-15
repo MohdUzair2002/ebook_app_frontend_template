@@ -98,13 +98,13 @@ export function SiteHeader({ withSearch = false }: Props) {
             <div className="flex items-center gap-2 text-sm font-semibold">
               <Link
                 href="/login"
-                className="rounded border border-primary px-3.5 py-1.5 hover:bg-primary hover:text-white transition-all duration-300"
+                className="rounded border border-primary px-2.5 py-1.5 hover:bg-primary hover:text-white transition-all duration-300 whitespace-nowrap"
               >
                 LogIn
               </Link>
               <Link
                 href="/signup"
-                className="rounded bg-primary text-white px-3.5 py-1.5 hover:bg-primary-container transition-all duration-300"
+                className="rounded bg-primary text-white px-2.5 py-1.5 hover:bg-primary-container transition-all duration-300 whitespace-nowrap hidden sm:block"
               >
                 SignUp
               </Link>
