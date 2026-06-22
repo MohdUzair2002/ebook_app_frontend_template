@@ -29,7 +29,7 @@ export default function UpdateBook() {
   useEffect(() => {
     // Check if user is admin
     const checkAdmin = setTimeout(() => {
-      if (!isLoggedIn || role !== "admin") {
+      if (!isLoggedIn || (role !== "admin" && role !== "publisher")) {
         router.push("/");
       }
     }, 100);

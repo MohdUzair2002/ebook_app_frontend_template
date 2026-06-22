@@ -182,7 +182,7 @@ export default function BookDetailPage() {
                 <div className="mt-8 flex flex-wrap gap-3">
                   {isLoggedIn && (
                     <>
-                      {role !== "admin" ? (
+                      {role !== "admin" && role !== "publisher" ? (
                         <>
                           {isPurchased ? (
                             <div className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 text-white text-sm font-semibold px-6 py-3">
@@ -206,7 +206,7 @@ export default function BookDetailPage() {
                             </>
                           )}
                         </>
-                      ) : (
+                      ) : (role === "admin" || role === "publisher") ? (
                         <>
                           <Link
                             href={`/update-book/${id}`}
@@ -221,7 +221,7 @@ export default function BookDetailPage() {
                             <Trash className="size-4" /> Delete Book
                           </button>
                         </>
-                      )}
+                      ) : null}
                     </>
                   )}
                 </div>

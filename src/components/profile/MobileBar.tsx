@@ -31,10 +31,12 @@ export default function MobileBar() {
             <FaHeart className="size-4" />
             <span>Favourites</span>
           </Link>
-          <Link href="/profile/orderHistory" className={getTabClass("/profile/orderHistory")}>
-            <FaHistory className="size-4" />
-            <span>Orders</span>
-          </Link>
+          {role === "user" && (
+            <Link href="/profile/orderHistory" className={getTabClass("/profile/orderHistory")}>
+              <FaHistory className="size-4" />
+              <span>Orders</span>
+            </Link>
+          )}
           <Link href="/profile/settings" className={getTabClass("/profile/settings")}>
             <FaGear className="size-4" />
             <span>Settings</span>

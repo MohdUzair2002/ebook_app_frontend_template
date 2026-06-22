@@ -31,11 +31,14 @@ export function SiteHeader({ withSearch = false }: Props) {
   if (!isLoggedIn) {
     links = links.slice(0, 2);
   } else if (role === "user") {
-    links = links.slice(0, 5);
+    // Remove Wishlist+ and Profile — covered by icons
+    links = links.slice(0, 3);
   } else if (role === "admin") {
-    links = [links[0], links[1], links[5]];
+    // Remove Admin Profile — covered by icon
+    links = [links[0], links[1]];
   } else if (role === "publisher") {
-    links = [links[0], links[6], links[7], links[8]];
+    // Remove Publisher Profile — covered by icon
+    links = [links[0], links[6], links[7]];
   }
 
   return (
@@ -68,8 +71,7 @@ export function SiteHeader({ withSearch = false }: Props) {
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-foreground/80">
           {links.map((l) => {
-            const isActive = l.href === "/" ? pathname === "/" : pathname?.startsWith(l.href);
-            const isProfileLink = l.title.includes("Profile");
+            const isActive = pathname === l.href;            const isProfileLink = l.title.includes("Profile");
             return (
               <Link
                 key={l.title}
@@ -129,8 +131,7 @@ export function SiteHeader({ withSearch = false }: Props) {
       {menuOpen && (
         <div className="md:hidden bg-background border-t border-outline-variant/40 px-4 py-4 flex flex-col gap-1">
           {links.map((l) => {
-            const isActive = l.href === "/" ? pathname === "/" : pathname?.startsWith(l.href);
-            return (
+            const isActive = pathname === l.href;            return (
               <Link
                 key={l.title}
                 href={l.href}

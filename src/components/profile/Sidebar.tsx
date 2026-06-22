@@ -89,10 +89,12 @@ export default function Sidebar({ ProfileData }: SidebarProps) {
               <FaHeart className="size-4 shrink-0" />
               <span>Favourites</span>
             </Link>
-            <Link href="/profile/orderHistory" className={getNavItemClass("/profile/orderHistory")}>
-              <FaHistory className="size-4 shrink-0" />
-              <span>Order History</span>
-            </Link>
+            {role === "user" && (
+              <Link href="/profile/orderHistory" className={getNavItemClass("/profile/orderHistory")}>
+                <FaHistory className="size-4 shrink-0" />
+                <span>Order History</span>
+              </Link>
+            )}
             <Link href="/profile/settings" className={getNavItemClass("/profile/settings")}>
               <FaGear className="size-4 shrink-0" />
               <span>Settings</span>

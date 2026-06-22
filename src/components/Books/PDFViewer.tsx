@@ -1,5 +1,5 @@
 "use client";
-
+import { toast } from "react-toastify";
 import { useState, useEffect, useRef } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import { 
@@ -106,7 +106,9 @@ export default function PDFViewer({ bookId, title, onClose }: PDFViewerProps) {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) return;
-    fetch(`https://kitab-ghar-new-backend-production.up.railway.app/api/v1/highlights/${bookId}`, {
+    // fetch(`https://kitab-ghar-new-backend-production.up.railway.app/api/v1/highlights/${bookId}`, {
+      fetch(`https://api.darulishaatebooks.com/api/v1/highlights/${bookId}`, {
+      // fetch(`http://localhost:5000/api/v1/highlights/${bookId}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((r) => r.json())
@@ -122,7 +124,9 @@ export default function PDFViewer({ bookId, title, onClose }: PDFViewerProps) {
   }, [pageNumber, strokes]);
 
   // Sync canvas size to PDF page
-  useEffect(() => {
+  // Sync canvas size to PDF page
+useEffect(() => {
+  const syncCanvas = () => {
     const pdfCanvas = canvasRef.current?.parentElement?.querySelector("canvas:not([data-highlight])") as HTMLCanvasElement;
     if (pdfCanvas && canvasRef.current) {
       const w = pdfCanvas.offsetWidth;
@@ -133,10 +137,16 @@ export default function PDFViewer({ bookId, title, onClose }: PDFViewerProps) {
       canvasRef.current.style.height = h + "px";
       redrawCanvas(canvasRef.current, strokes);
     }
-  }, [pageNumber, numPages, scale]);
+  };
+
+  const timer = setTimeout(syncCanvas, pageNumber === 1 ? 600 : 300);
+  return () => clearTimeout(timer);
+}, [pageNumber, numPages, scale]);
 
   const getPdfUrl = () =>
-    `https://kitab-ghar-new-backend-production.up.railway.app/api/v1/books/getBookFile/${encodeURIComponent(bookId)}`;
+    // `https://kitab-ghar-new-backend-production.up.railway.app/api/v1/books/getBookFile/${encodeURIComponent(bookId)}`;
+    `https://api.darulishaatebooks.com/api/v1/books/getBookFile/${encodeURIComponent(bookId)}`;
+    // `http://localhost:5000/api/v1/books/getBookFile/${encodeURIComponent(bookId)}`;
 
   const nextPage = () => setPageNumber((prev) => Math.min(prev + 1, numPages || 1));
   const prevPage = () => setPageNumber((prev) => Math.max(prev - 1, 1));
@@ -247,17 +257,23 @@ export default function PDFViewer({ bookId, title, onClose }: PDFViewerProps) {
   };
 
   const saveHighlights = async () => {
-    const token = localStorage.getItem("token");
-    try {
-      await fetch(`https://kitab-ghar-new-backend-production.up.railway.app/api/v1/highlights`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-        body: JSON.stringify({ userId: localStorage.getItem("id"), bookId, highlights: strokes }),
-      });
-    } catch (err) {
-      console.error("Failed to save highlights", err);
+  const token = localStorage.getItem("token");
+  try {
+    // const res = await fetch(`http://localhost:5000/api/v1/highlights`, {
+      const res = await fetch(`https://api.darulishaatebooks.com/api/v1/highlights`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+      body: JSON.stringify({ userId: localStorage.getItem("id"), bookId, highlights: strokes }),
+    });
+    if (res.ok) {
+      toast.success("Highlights saved successfully! ✅");
+    } else {
+      toast.error("Failed to save, please try again");
     }
-  };
+  } catch (err) {
+    toast.error("Could not connect to server");
+  }
+};
 
   const pdfWidth = fullscreen
     ? Math.min(windowWidth * 0.9, 1200)

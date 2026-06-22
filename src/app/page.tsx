@@ -3,8 +3,7 @@
 import { useEffect, useState,useRef} from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Search, ArrowRight, BookmarkCheck, Sparkles, EyeOff, Laptop, Moon, NotebookPen, Stars, Building2, Brain, Cpu, Palette, LineChart, Landmark, ChevronLeft, ChevronRight } from "lucide-react";
-import { SiteHeader } from "@/components/site/SiteHeader";
+import { Search, ArrowRight, BookmarkCheck, Sparkles, EyeOff, Laptop, Moon, NotebookPen, Stars, Building2, Brain, Cpu, Palette, LineChart, Landmark, ChevronLeft, ChevronRight, BookOpen } from "lucide-react";import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { Container } from "@/components/site/Container";
 import { BookCard } from "@/components/site/BookCard";
@@ -21,12 +20,14 @@ const features = [
 ];
 
 const subjects = [
-  { Icon: Building2, label: "Architecture" },
-  { Icon: Brain, label: "Philosophy" },
-  { Icon: Cpu, label: "Computer Science" },
-  { Icon: Palette, label: "Design & Art" },
-  { Icon: LineChart, label: "Economics" },
-  { Icon: Landmark, label: "History" },
+  { Icon: BookOpen, label: "Quran & Tafsir" },
+  { Icon: BookmarkCheck, label: "Hadith" },
+  { Icon: Landmark, label: "Fiqh" },
+  { Icon: Stars, label: "Aqeedah" },
+  { Icon: Moon, label: "Seerah" },
+  { Icon: Building2, label: "Islamic History" },
+  { Icon: NotebookPen, label: "Arabic Language" },
+  { Icon: Sparkles, label: "Tasawwuf" },
 ];
 
 export default function HomePage() {

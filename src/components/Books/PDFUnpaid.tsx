@@ -53,8 +53,9 @@ export default function PDFUnpaid({ bookId, title, onClose, isPreviewMode = true
   }, []);
 
   const getPdfUrl = () => 
-    `https://kitab-ghar-new-backend-production.up.railway.app/api/v1/books/getBookFile/${encodeURIComponent(bookId)}`;
-
+    // `https://kitab-ghar-new-backend-production.up.railway.app/api/v1/books/getBookFile/${encodeURIComponent(bookId)}`;
+    `https://api.darulishaatebooks.com/api/v1/books/getBookFile/${encodeURIComponent(bookId)}`;
+    // `http://localhost:5000/api/v1/books/getBookFile/${encodeURIComponent(bookId)}`;
   useEffect(() => {
     if (numPages && isPreviewMode) {
       // Show 5% of pages or minimum 5 pages
